@@ -345,8 +345,8 @@ min_salary_inc_diff_graph <- min_salary_inc_diff |>
   mutate(Accrued_Seasons = ifelse(Accrued_Seasons == "4", "4-6", Accrued_Seasons)) |> 
   filter(!(Accrued_Seasons %in% c("5", "6"))) |> 
   ggplot() +
-  geom_col(aes(x = factor(Year), y = new_cap_pct), alpha = 1, fill = "#27408B") +
-  geom_col(aes(x = factor(Year), y = pct_cap), alpha = 0.4, fill = "black") +
+  geom_col(aes(x = factor(Year), y = new_cap_pct), alpha = 1, fill = "#7851A9") +
+  geom_col(aes(x = factor(Year), y = pct_cap), alpha = 0.4, fill = "darkblue") +
   facet_wrap(~Accrued_Seasons, ncol=3) +
   theme_minimal() +
   theme(
@@ -363,7 +363,7 @@ min_salary_inc_diff_graph <- min_salary_inc_diff |>
     legend.position = "NONE") +
   labs(x = "Year", y = "% of Cap", 
        title = "How Would Minimum Salaries Change Under This New Guide?", 
-       subtitle = "Orange Represents a Higher Salary for the Previous Method | Blue Represents Higher Salary Under New Method",
+       subtitle = "Light Purple Indicates the Minimum Salary Increases Under Our Proposal",
        caption = "Data via NFLReadR + OTC | Cooper Davis | 2025-2027 Cap Spaces Projected by OTC") +
   geom_hline(yintercept = 0, linetype = "dashed", color = "gray")
 min_salary_inc_diff_graph
