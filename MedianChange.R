@@ -88,8 +88,8 @@ mutated_active2 <- active_contracts_rookies_analysis |>
 combined2 <- bind_rows(mutated_Jason2, mutated_active2)
 
 ggplot() +
-  geom_histogram(data = combined2[combined2$year == 2024, ], aes(x = apy_cap_pct, y = ..count.. / sum(..count..)),  fill = "skyblue", color = "skyblue", binwidth = 0.004, boundary = 0) +
-  geom_histogram(data = combined2[combined2$year == 2014, ], aes(x = apy_cap_pct, y = ..count.. / sum(..count..)),  fill = "gray", color = "gray", binwidth = 0.004, alpha = 0.7, boundary = 0) +
+  geom_histogram(data = combined2[combined2$year == 2024, ], aes(x = apy_cap_pct, y = ..count.. / sum(..count..),  fill = "2024"), color = "skyblue", binwidth = 0.004, boundary = 0) +
+  geom_histogram(data = combined2[combined2$year == 2014, ], aes(x = apy_cap_pct, y = ..count.. / sum(..count..),  fill = "2014"), color = "gray", binwidth = 0.004, alpha = 0.7, boundary = 0) +
   theme_minimal() +
   geom_vline(xintercept = c(quantile(combined2$apy_cap_pct[combined2$year == 2024], 0.20, na.rm = T), 
                             quantile(combined2$apy_cap_pct[combined2$year == 2024], 0.80, na.rm = T)),
@@ -98,14 +98,16 @@ ggplot() +
                             quantile(combined2$apy_cap_pct[combined2$year == 2014], 0.80, na.rm = T)),
              color = "forestgreen", linetype = "dashed", size = 0.2) +
   scale_x_continuous(limits = c(0, NA)) +
+  scale_fill_manual(values = c("2024" = "skyblue", "2014" = "gray"), breaks = c("2014", "2024") )+ 
   labs(x = "APY Cap Percentage", y = "Frequency", 
        title = "Rookie-Excluded APY Cap Percentage Distribution 2014 vs. 2024",
-       subtitle = "Gray Represents 2014 Middle Class | Blue Represents 2024 Middle Class",
        caption = "Data via OTC | Cooper Davis | Green Dashed Lines are 2014 Middle Class | Red Dashed Lines are 2024 Middle Class") +
   theme(panel.grid.major.y = element_line(size = 0.5),
         plot.title = element_text(hjust=0.5, size=20),
         axis.text.y = element_text(colour="black"),
-        plot.subtitle = element_text(hjust=0.5))
+        plot.subtitle = element_text(hjust=0.5),
+        legend.title = element_blank(),
+        legend.position = "top")
 
 
 ggsave('/Users/Cooper/Documents/Folder for Contracts Project/Graphs/MiddleClassChangeNoRookies.png', width = 10, height = 7, dpi = "retina")
@@ -183,8 +185,8 @@ combined <- bind_rows(mutated_Jason, mutated_active)
 
 
 ggplot() +
-  geom_histogram(data = combined[combined$year == 2024, ], aes(x = apy_cap_pct, y = ..count.. / sum(..count..)),  fill = "skyblue", color = "skyblue", binwidth = 0.004, boundary = 0) +
-  geom_histogram(data = combined[combined$year == 2014, ], aes(x = apy_cap_pct, y = ..count.. / sum(..count..)),  fill = "gray", color = "gray", binwidth = 0.004, alpha = 0.7, boundary = 0) +
+  geom_histogram(data = combined[combined$year == 2024, ], aes(x = apy_cap_pct, y = ..count.. / sum(..count..),  fill = "2024"), binwidth = 0.004, boundary = 0) +
+  geom_histogram(data = combined[combined$year == 2014, ], aes(x = apy_cap_pct, y = ..count.. / sum(..count..),  fill = "2014"), alpha = 0.7, binwidth = 0.004, boundary = 0) +
   theme_minimal() +
   geom_vline(xintercept = c(quantile(combined$apy_cap_pct[combined$year == 2024], 0.20, na.rm = T), 
                             quantile(combined$apy_cap_pct[combined$year == 2024], 0.80, na.rm = T)),
@@ -193,14 +195,16 @@ ggplot() +
                             quantile(combined$apy_cap_pct[combined$year == 2014], 0.80, na.rm = T)),
              color = "forestgreen", linetype = "dashed", size = 0.2) +
   scale_x_continuous(limits = c(0, NA)) +
+  scale_fill_manual(values = c("2024" = "skyblue", "2014" = "gray"), breaks = c("2014", "2024") )+
   labs(x = "APY Cap Percentage", y = "Frequency", 
        title = "Rookie-Included APY Cap Percentage Distribution 2014 vs. 2024",
-       subtitle = "Gray Represents 2014 Middle Class | Blue Represents 2024 Middle Class",
        caption = "Data via OTC | Cooper Davis | Green Dashed Lines are 2014 Middle Class | Red Dashed Lines are 2024 Middle Class") + 
   theme(panel.grid.major.y = element_line(size = 0.5),
         plot.title = element_text(hjust=0.5, size=20),
         axis.text.y = element_text(colour="black"),
-        plot.subtitle = element_text(hjust=0.5))
+        plot.subtitle = element_text(hjust=0.5),
+        legend.title = element_blank(),
+        legend.position = "top")
 
 ggsave('/Users/Cooper/Documents/Folder for Contracts Project/Graphs/MiddleClassChangeRookies.png', width = 10, height = 7, dpi = "retina")
 
