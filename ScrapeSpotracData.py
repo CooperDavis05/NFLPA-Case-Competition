@@ -1,3 +1,7 @@
+import requests
+from bs4 import BeautifulSoup, Comment
+import pandas as pd
+
 def generate_team_salary_chart(team, year):
     url = 'https://www.spotrac.com/nfl/' + team + '/cap/_/year/' + str(year) + '/sort/cap_total'
     r = requests.get(url)
