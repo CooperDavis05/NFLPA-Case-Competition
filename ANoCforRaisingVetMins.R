@@ -577,8 +577,8 @@ active_contracts_both_join <- active_contracts2_join |>
 # Graph of the joined
 active_contracts_both_join_graph <- active_contracts_both_join |>
   ggplot() +
-  geom_histogram(aes(x = caphit_pct_before, y = ..count.. / sum(..count..)), binwidth = 0.0025, boundary = 0, fill = "darkred", alpha = 1) +
-  geom_histogram(aes(x = caphit_pct_after, y = ..count.. / sum(..count..)), binwidth = 0.0025, boundary = 0, fill = "blue", alpha = 0.4) +
+  geom_histogram(aes(x = caphit_pct_before, y = ..count.. / sum(..count..), fill = "Before"), binwidth = 0.0025, boundary = 0, alpha = 1) +
+  geom_histogram(aes(x = caphit_pct_after, y = ..count.. / sum(..count..), fill = "After"), binwidth = 0.0025, boundary = 0, alpha = 0.4) +
   theme_minimal() +
   scale_x_continuous(limits = c(0, 0.125)) +
   geom_vline(xintercept = c((2/3)*quantile(active_contracts_both_join$caphit_pct_before, 0.50, na.rm = T), 
@@ -590,10 +590,13 @@ active_contracts_both_join_graph <- active_contracts_both_join |>
   labs(x = "Cap Hit Percentage 2024", y = "Frequency", 
        title = "Cap Hit Percentage Distribution 2024",
        subtitle = "Data via OTC | Cooper Davis") +
+  scale_fill_manual(values = c("Before" = "darkred", "After" = "blue"), breaks = c("Before", "After")) +
   theme(panel.grid.major.y = element_line(size = 0.5),
         plot.title = element_text(hjust=0.5, size=20),
         axis.text.y = element_text(colour="black"),
-        plot.subtitle = element_text(hjust=0.5))
+        plot.subtitle = element_text(hjust=0.5),
+        legend.title = element_blank(),
+        legend.position = "top")
 
 ggsave('/Users/Cooper/Documents/Folder for Contracts Project/Graphs/ChangeInMedianStuff.png', active_contracts_both_join_graph,  width = 10, height = 7, dpi = "retina")
 
